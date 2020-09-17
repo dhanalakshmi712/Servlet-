@@ -1,0 +1,92 @@
+package com.pack;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class ReqServlet
+ */
+//@WebServlet("/ReqServlet")
+public class ReqServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public ReqServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setContentType("text/html");
+		PrintWriter pw=response.getWriter();
+		String s=request.getParameter("n1");
+		pw.println("name"+s);
+		
+	}
+
+}
+
+login.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="http://localhost:8086/Demo/ReqServlet" method="post">
+<input type="text" name="n1">
+<input type="submit" name="submit">
+</form>
+</body>
+</html>
+
+web.xml
+
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>Demo</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  <servlet>
+    <servlet-name>Postservlet</servlet-name>
+    <servlet-class>com.pack.Postservlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Postservlet</servlet-name>
+    <url-pattern>/Postservlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>ReqServlet</servlet-name>
+    <servlet-class>com.pack.ReqServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReqServlet</servlet-name>
+    <url-pattern>/ReqServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
